@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriverSolutions", "DriverSolutions\DriverSolutions.csproj", "{35B1C832-57EC-47DA-87F5-430B43FAB872}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriverSolutions.DAL", "DriverSolutions.DAL\DriverSolutions.DAL.csproj", "{D62BD9CF-8698-4FB8-ADA8-7D18C48F3944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriverSolutions.BOL", "DriverSolutions.BOL\DriverSolutions.BOL.csproj", "{DD5D85F5-BE89-419A-9529-735AE04F3D88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriverSolutions.Patcher", "DriverSolutions.Patcher\DriverSolutions.Patcher.csproj", "{246A8582-DF37-41D7-9AF4-44D95EB4009E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriverSolutions.Messenger", "DriverSolutions.Messenger\DriverSolutions.Messenger.csproj", "{C243BDF0-8C33-4D9D-B7AC-67B17AE28890}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35B1C832-57EC-47DA-87F5-430B43FAB872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35B1C832-57EC-47DA-87F5-430B43FAB872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35B1C832-57EC-47DA-87F5-430B43FAB872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35B1C832-57EC-47DA-87F5-430B43FAB872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D62BD9CF-8698-4FB8-ADA8-7D18C48F3944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D62BD9CF-8698-4FB8-ADA8-7D18C48F3944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D62BD9CF-8698-4FB8-ADA8-7D18C48F3944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D62BD9CF-8698-4FB8-ADA8-7D18C48F3944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD5D85F5-BE89-419A-9529-735AE04F3D88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD5D85F5-BE89-419A-9529-735AE04F3D88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD5D85F5-BE89-419A-9529-735AE04F3D88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD5D85F5-BE89-419A-9529-735AE04F3D88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{246A8582-DF37-41D7-9AF4-44D95EB4009E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{246A8582-DF37-41D7-9AF4-44D95EB4009E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{246A8582-DF37-41D7-9AF4-44D95EB4009E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{246A8582-DF37-41D7-9AF4-44D95EB4009E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C243BDF0-8C33-4D9D-B7AC-67B17AE28890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C243BDF0-8C33-4D9D-B7AC-67B17AE28890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C243BDF0-8C33-4D9D-B7AC-67B17AE28890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C243BDF0-8C33-4D9D-B7AC-67B17AE28890}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
