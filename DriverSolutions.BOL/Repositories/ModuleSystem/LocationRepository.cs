@@ -26,32 +26,39 @@ namespace DriverSolutions.BOL.Repositories.ModuleSystem
             if (companies != null && companies.Length > 0)
                 query = query.And(q => companies.Contains(q.CompanyID));
 
-            return db.Locations
+            uint[] ids = db.Locations
                 .Where(query)
-                .Select(l => new LocationModel()
-                {
-                    LocationID = l.LocationID,
-                    LocationName = l.LocationName,
-                    LocationCode = l.LocationCode,
-                    LocationAddress = l.LocationAddress,
-                    LocationPhone = l.LocationPhone,
-                    LocationFax = l.LocationFax,
-                    ConfirmationContactID = l.ConfirmationContactID,
-                    ConfirmationContact = (l.ConfirmationContactID.HasValue ? ContactRepository.GetContact(db, l.ConfirmationContactID.Value) : new ContactModel()),
-                    InvoiceContactID = l.InvoiceContactID,
-                    InvoiceContact = (l.InvoiceContactID.HasValue ? ContactRepository.GetContact(db, l.InvoiceContactID.Value) : new ContactModel()),
-                    DispatchContactID = l.DispatchContactID,
-                    DispatchContact = (l.DispatchContactID.HasValue ? ContactRepository.GetContact(db, l.DispatchContactID.Value) : new ContactModel()),
-                    CompanyID = l.CompanyID,
-                    TravelPay = l.TravelPay,
-                    TravelPayName = l.TravelPayName,
-                    LunchTime = l.LunchTime,
-                    IsEnabled = l.IsEnabled,
-                    IncludeConfirmation = l.IncludeConfirmation,
-                    IsChanged = false
-                })
-                .OrderBy(l => l.LocationName)
-                .ToList();
+                .Select(i => i.LocationID)
+                .ToArray();
+
+            return LocationRepository.GetLocations(db, ids);
+
+            //return db.Locations
+            //    .Where(query)
+            //    .Select(l => new LocationModel()
+            //    {
+            //        LocationID = l.LocationID,
+            //        LocationName = l.LocationName,
+            //        LocationCode = l.LocationCode,
+            //        LocationAddress = l.LocationAddress,
+            //        LocationPhone = l.LocationPhone,
+            //        LocationFax = l.LocationFax,
+            //        ConfirmationContactID = l.ConfirmationContactID,
+            //        ConfirmationContact = (l.ConfirmationContactID.HasValue ? ContactRepository.GetContact(db, l.ConfirmationContactID.Value) : new ContactModel()),
+            //        InvoiceContactID = l.InvoiceContactID,
+            //        InvoiceContact = (l.InvoiceContactID.HasValue ? ContactRepository.GetContact(db, l.InvoiceContactID.Value) : new ContactModel()),
+            //        DispatchContactID = l.DispatchContactID,
+            //        DispatchContact = (l.DispatchContactID.HasValue ? ContactRepository.GetContact(db, l.DispatchContactID.Value) : new ContactModel()),
+            //        CompanyID = l.CompanyID,
+            //        TravelPay = l.TravelPay,
+            //        TravelPayName = l.TravelPayName,
+            //        LunchTime = l.LunchTime,
+            //        IsEnabled = l.IsEnabled,
+            //        IncludeConfirmation = l.IncludeConfirmation,
+            //        IsChanged = false
+            //    })
+            //    .OrderBy(l => l.LocationName)
+            //    .ToList();
         }
 
         public static List<LocationModel> GetLocations(DSModel db, params uint[] locationIDs)
