@@ -96,7 +96,12 @@ namespace DriverSolutions.BOL.Managers.ModuleFinance
                     }
                     catch (Exception ex)
                     {
-                        RaiseComplete(new ProgressItem(ProgressStatus.Error, ex.Message));
+                        using (var db = DB.GetContext())
+                        {
+                            Logger.Log(db, ex, "InvoiceCatalogManager.GenerateInvoices()");
+                            RaiseComplete(new ProgressItem(ProgressStatus.Error, ex.ToString()));
+                            db.FlushChanges();
+                        }
                     }
                 });
         }
@@ -404,7 +409,7 @@ namespace DriverSolutions.BOL.Managers.ModuleFinance
 
             using (var db = DB.GetContext())
             {
-                return LocationRepository.GetLocations(db, companies)
+                return LocationRepository.GetLocationsByCompanies(db, companies)
                     .Select(l => new UtilityModel<uint>(l.LocationID, l.LocationName))
                     .ToList();
             }

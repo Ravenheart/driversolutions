@@ -307,6 +307,14 @@ namespace DriverSolutions.DAL
 			}
 		}
 		
+		public IQueryable<Log> Logs 
+		{
+			get
+			{
+				return this.GetAll<Log>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -457,6 +465,10 @@ namespace DriverSolutions.DAL
 			get;
 		}
 		IQueryable<DriversLicensesReminder> DriversLicensesReminders
+		{
+			get;
+		}
+		IQueryable<Log> Logs
 		{
 			get;
 		}

@@ -39,7 +39,7 @@ namespace DriverSolutions.ModuleReports
             if (CompanyID.EditValue != null)
             {
                 uint[] ids = CompanyID.GetCheckedValues(e.NewValue);
-                var locs = LocationRepository.GetLocations(this.DbContext, ids);
+                var locs = LocationRepository.GetLocationsByCompanies(this.DbContext, ids);
                 LocationID.Properties.DataSource = locs;
                 LocationID.Properties.DropDownRows = locs.Count + 1;
             }

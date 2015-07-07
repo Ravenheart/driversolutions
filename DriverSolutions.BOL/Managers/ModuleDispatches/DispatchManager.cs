@@ -117,7 +117,7 @@ namespace DriverSolutions.BOL.Managers.ModuleDispatches
         {
             using (var db = DB.GetContext())
             {
-                return LocationRepository.GetLocations(db, companyID);
+                return LocationRepository.GetLocationsByCompany(db, companyID);
             }
         }
 

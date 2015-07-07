@@ -44,7 +44,7 @@ namespace DriverSolutions.ModuleSystem
                     _CompanyID = value;
                     try
                     {
-                        btnLocation.Properties.DataSource = LocationRepository.GetLocations(this.DbContext, this.CompanyID);
+                        btnLocation.Properties.DataSource = LocationRepository.GetLocationsByCompany(this.DbContext, this.CompanyID);
                     }
                     catch { }
                 }
@@ -108,7 +108,7 @@ namespace DriverSolutions.ModuleSystem
             if (this.DesignMode) return;
             try
             {
-                btnLocation.Properties.DataSource = LocationRepository.GetLocations(this.DbContext, this.CompanyID);
+                btnLocation.Properties.DataSource = LocationRepository.GetLocationsByCompany(this.DbContext, this.CompanyID);
             }
             catch { }
 

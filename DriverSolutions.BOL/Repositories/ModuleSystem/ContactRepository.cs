@@ -10,25 +10,44 @@ namespace DriverSolutions.BOL.Repositories.ModuleSystem
 {
     public class ContactRepository
     {
+        public static List<ContactModel> GetContacts(DSModel db, params uint[] contactIDs)
+        {
+            if (db == null)
+                throw new ArgumentNullException("db");
+            if (contactIDs.Length == 0)
+                return new List<ContactModel>();
+
+            string sql = @"
+                SELECT
+                  c.*,
+                  ToBool(0) AS IsChanged
+                FROM contacts c
+                WHERE c.ContactID IN (@ContactID);";
+            sql = sql.Replace("@ContactID", string.Join<uint>(",", contactIDs));
+            return db.ExecuteQuery<ContactModel>(sql).ToList();
+        }
+
         public static ContactModel GetContact(DSModel db, uint contactID)
         {
             if (db == null)
                 throw new ArgumentNullException("db");
 
-            var poco = db.Contacts
-                .Where(c => c.ContactID == contactID)
-                .FirstOrDefault();
-            if (poco == null)
-                return null;
+            return ContactRepository.GetContacts(db, contactID).FirstOrDefault();
 
-            var mod = new ContactModel();
-            mod.ContactID = poco.ContactID;
-            mod.ContactName = poco.ContactName;
-            mod.ContactPhone = poco.ContactPhone;
-            mod.ContactEmail = poco.ContactEmail;
-            mod.IsChanged = false;
+            //var poco = db.Contacts
+            //    .Where(c => c.ContactID == contactID)
+            //    .FirstOrDefault();
+            //if (poco == null)
+            //    return null;
 
-            return mod;
+            //var mod = new ContactModel();
+            //mod.ContactID = poco.ContactID;
+            //mod.ContactName = poco.ContactName;
+            //mod.ContactPhone = poco.ContactPhone;
+            //mod.ContactEmail = poco.ContactEmail;
+            //mod.IsChanged = false;
+
+            //return mod;
         }
 
         public static Contact SaveContact(DSModel db, KeyBinder key, ContactModel model)

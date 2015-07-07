@@ -88,9 +88,9 @@ namespace DriverSolutions.BOL.Managers.ModuleSystem
         public List<LocationModel> GetLocations(uint? companyID = null)
         {
             if (companyID.HasValue)
-                return LocationRepository.GetLocations(this.DbContext, new uint[] { companyID.Value });
+                return LocationRepository.GetLocationsByCompanies(this.DbContext, new uint[] { companyID.Value });
 
-            return LocationRepository.GetLocations(this.DbContext);
+            return LocationRepository.GetLocationsByCompanies(this.DbContext);
         }
 
         public List<CompanyModel> GetCompanies()

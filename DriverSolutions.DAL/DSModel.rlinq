@@ -1394,6 +1394,28 @@
           </orm:reference>
         </orm:field>
       </orm:class>
+      <orm:class name="Log" uniqueId="510b65d2-b070-402d-aaf2-a4d86bb33dd8">
+        <orm:table name="logs" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="LogID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_logID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_logID" property="LogID" behavior="readwrite" uniqueId="43f6aa4f-2595-4b30-b265-6a9abd0585df" type="System.UInt32">
+          <orm:column name="LogID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_logType" property="LogType" behavior="readwrite" uniqueId="86622b91-ac0e-457a-834b-5304cac19d7f" type="System.Byte">
+          <orm:column name="LogType" sql-type="tinyint unsigned" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Byte" />
+        </orm:field>
+        <orm:field name="_logLocation" property="LogLocation" behavior="readwrite" uniqueId="f2134e5b-9a31-480b-9076-d3c88c03a611" type="System.String">
+          <orm:column name="LogLocation" sql-type="text" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_logMessage" property="LogMessage" behavior="readwrite" uniqueId="de1beb31-0922-4146-abe0-b364b8e34b73" type="System.String">
+          <orm:column name="LogMessage" sql-type="text" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="users">
@@ -1912,6 +1934,12 @@
           <orm:column name="ReminderID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
         </orm:constraint>
       </orm:table>
+      <orm:table name="logs">
+        <orm:column name="LogID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="LogType" sql-type="tinyint unsigned" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Byte" />
+        <orm:column name="LogLocation" sql-type="text" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="LogMessage" sql-type="text" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+      </orm:table>
       <orm:procedure name="PeekDriverCode" is-function="true" return-type="varchar(255) CHARSET utf8">
         <orm:procedure-parameter name="Prefix" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" mode="in" type="System.String" />
         <orm:result-sets />
@@ -1961,6 +1989,10 @@
         <orm:result-sets />
       </orm:procedure>
       <orm:procedure name="PP_MigrateLicenses">
+        <orm:result-sets />
+      </orm:procedure>
+      <orm:procedure name="ToBool" is-function="true" return-type="bit(1)">
+        <orm:procedure-parameter name="arg" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" mode="in" type="System.Int32" />
         <orm:result-sets />
       </orm:procedure>
     </orm:schema>
@@ -3039,6 +3071,12 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
+    <DomainClass Id="510b65d2-b070-402d-aaf2-a4d86bb33dd8" name="Log" namespace="DriverSolutions.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="LogID">
+      <Property Id="43f6aa4f-2595-4b30-b265-6a9abd0585df" name="LogID" type="UInt32" label="LogID : UInt32" kind="Persistent" identity="true" fieldName="_logID" />
+      <Property Id="f2134e5b-9a31-480b-9076-d3c88c03a611" name="LogLocation" label="LogLocation : String" kind="Persistent" fieldName="_logLocation" />
+      <Property Id="de1beb31-0922-4146-abe0-b364b8e34b73" name="LogMessage" label="LogMessage : String" kind="Persistent" fieldName="_logMessage" />
+      <Property Id="86622b91-ac0e-457a-834b-5304cac19d7f" name="LogType" type="Byte" label="LogType : Byte" kind="Persistent" fieldName="_logType" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="0d109d24-2923-4a8b-8514-c89da1f32ad5">
@@ -3075,6 +3113,7 @@
         <entitySetProperty name="DriversLicenses" namespace="DriverSolutions.DAL" type="DriversLicense" label="DriversLicenses : IQueryable&lt;DriverSolutions.DAL.DriversLicense&gt;" />
         <entitySetProperty name="ConstLicenses" namespace="DriverSolutions.DAL" type="ConstLicense" label="ConstLicenses : IQueryable&lt;DriverSolutions.DAL.ConstLicense&gt;" />
         <entitySetProperty name="DriversLicensesReminders" namespace="DriverSolutions.DAL" type="DriversLicensesReminder" label="DriversLicensesReminders : IQueryable&lt;DriverSolutions.DAL.DriversLicensesReminder&gt;" />
+        <entitySetProperty name="Logs" namespace="DriverSolutions.DAL" type="Log" label="Logs : IQueryable&lt;DriverSolutions.DAL.Log&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

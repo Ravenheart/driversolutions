@@ -37,7 +37,7 @@ namespace DriverSolutions.BOL.Repositories.ModuleSystem
             mod.LunchTime = poco.LunchTime;
             mod.TrainingTime = poco.TrainingTime;
             mod.IsEnabled = poco.IsEnabled;
-            mod.Locations.AddRange(LocationRepository.GetLocations(db, companyID));
+            mod.Locations.AddRange(LocationRepository.GetLocationsByCompany(db, companyID));
 
             mod.IsChanged = false;
 
