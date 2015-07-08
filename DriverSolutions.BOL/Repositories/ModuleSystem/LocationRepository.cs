@@ -32,33 +32,6 @@ namespace DriverSolutions.BOL.Repositories.ModuleSystem
                 .ToArray();
 
             return LocationRepository.GetLocations(db, ids);
-
-            //return db.Locations
-            //    .Where(query)
-            //    .Select(l => new LocationModel()
-            //    {
-            //        LocationID = l.LocationID,
-            //        LocationName = l.LocationName,
-            //        LocationCode = l.LocationCode,
-            //        LocationAddress = l.LocationAddress,
-            //        LocationPhone = l.LocationPhone,
-            //        LocationFax = l.LocationFax,
-            //        ConfirmationContactID = l.ConfirmationContactID,
-            //        ConfirmationContact = (l.ConfirmationContactID.HasValue ? ContactRepository.GetContact(db, l.ConfirmationContactID.Value) : new ContactModel()),
-            //        InvoiceContactID = l.InvoiceContactID,
-            //        InvoiceContact = (l.InvoiceContactID.HasValue ? ContactRepository.GetContact(db, l.InvoiceContactID.Value) : new ContactModel()),
-            //        DispatchContactID = l.DispatchContactID,
-            //        DispatchContact = (l.DispatchContactID.HasValue ? ContactRepository.GetContact(db, l.DispatchContactID.Value) : new ContactModel()),
-            //        CompanyID = l.CompanyID,
-            //        TravelPay = l.TravelPay,
-            //        TravelPayName = l.TravelPayName,
-            //        LunchTime = l.LunchTime,
-            //        IsEnabled = l.IsEnabled,
-            //        IncludeConfirmation = l.IncludeConfirmation,
-            //        IsChanged = false
-            //    })
-            //    .OrderBy(l => l.LocationName)
-            //    .ToList();
         }
 
         public static List<LocationModel> GetLocations(DSModel db, params uint[] locationIDs)
@@ -97,33 +70,6 @@ namespace DriverSolutions.BOL.Repositories.ModuleSystem
                 throw new ArgumentNullException("db");
 
             return LocationRepository.GetLocations(db, locationID).FirstOrDefault();
-
-            //var poco = db.Locations.Where(l => l.LocationID == locationID).FirstOrDefault();
-            //if (poco == null)
-            //    return null;
-
-            //LocationModel mod = new LocationModel();
-            //mod.LocationID = poco.LocationID;
-            //mod.LocationName = poco.LocationName;
-            //mod.LocationCode = poco.LocationCode;
-            //mod.LocationAddress = poco.LocationAddress;
-            //mod.LocationPhone = poco.LocationPhone;
-            //mod.LocationFax = poco.LocationFax;
-            //mod.ConfirmationContactID = poco.ConfirmationContactID;
-            //mod.ConfirmationContact = (poco.ConfirmationContactID.HasValue ? ContactRepository.GetContact(db, poco.ConfirmationContactID.Value) : new ContactModel());
-            //mod.InvoiceContactID = poco.InvoiceContactID;
-            //mod.InvoiceContact = (poco.InvoiceContactID.HasValue ? ContactRepository.GetContact(db, poco.InvoiceContactID.Value) : new ContactModel());
-            //mod.DispatchContactID = poco.DispatchContactID;
-            //mod.DispatchContact = (poco.DispatchContactID.HasValue ? ContactRepository.GetContact(db, poco.DispatchContactID.Value) : new ContactModel());
-            //mod.CompanyID = poco.CompanyID;
-            //mod.TravelPay = poco.TravelPay;
-            //mod.TravelPayName = poco.TravelPayName;
-            //mod.LunchTime = poco.LunchTime;
-            //mod.IsEnabled = poco.IsEnabled;
-            //mod.IncludeConfirmation = poco.IncludeConfirmation;
-            //mod.IsChanged = false;
-
-            //return mod;
         }
 
         public static LocationModel GetLocation(DSModel db, string locationCode)

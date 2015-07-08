@@ -33,21 +33,6 @@ namespace DriverSolutions.BOL.Repositories.ModuleSystem
                 throw new ArgumentNullException("db");
 
             return ContactRepository.GetContacts(db, contactID).FirstOrDefault();
-
-            //var poco = db.Contacts
-            //    .Where(c => c.ContactID == contactID)
-            //    .FirstOrDefault();
-            //if (poco == null)
-            //    return null;
-
-            //var mod = new ContactModel();
-            //mod.ContactID = poco.ContactID;
-            //mod.ContactName = poco.ContactName;
-            //mod.ContactPhone = poco.ContactPhone;
-            //mod.ContactEmail = poco.ContactEmail;
-            //mod.IsChanged = false;
-
-            //return mod;
         }
 
         public static Contact SaveContact(DSModel db, KeyBinder key, ContactModel model)
