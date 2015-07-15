@@ -124,7 +124,10 @@ namespace DriverSolutions.BOL.Managers.ModuleMedical
         {
             using (var db = DB.GetContext())
             {
-                return ReminderRepository.GetReminderKinds(db);
+                var kinds = ReminderRepository.GetReminderKinds(db);
+                kinds.RemoveAll(r => r.Value == 3);
+
+                return kinds;
             }
         }
     }

@@ -323,7 +323,6 @@ namespace DriverSolutions.DAL
 			backend.Logging.LogEventsToTrace = false;
 			backend.Logging.MetricStoreSnapshotInterval = 0;
 			backend.ConnectionPool.Pool = ConnectionPoolType.ADO;
-			backend.Runtime.CommandTimeout = 5;
 		
 			CustomizeBackendConfiguration(ref backend);
 		

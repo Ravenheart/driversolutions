@@ -9,6 +9,15 @@ namespace DriverSolutions.DAL
 {
     public class Logger
     {
+        public static void Log(LogType type, string location, string message)
+        {
+            using (var db = DB.GetContext())
+            {
+                Logger.Log(db, type, location, message);
+                db.SaveChanges();
+            }
+        }
+
         public static void Log(DSModel db, LogType type, string location, string message)
         {
             DriverSolutions.DAL.Log log = new Log();
@@ -27,6 +36,15 @@ namespace DriverSolutions.DAL
                     File.AppendAllText("error.log", log.ToMessage());
                 }
                 catch { }
+            }
+        }
+
+        public static void Log(Exception ex, string location = "")
+        {
+            using (var db = DB.GetContext())
+            {
+                Logger.Log(db, ex, location);
+                db.SaveChanges();
             }
         }
 

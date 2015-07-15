@@ -304,44 +304,48 @@ namespace DriverSolutions.BOL.Repositories.ModuleFinance
             if (filter == null)
                 throw new ArgumentNullException("filter");
 
-            var q = PredicateBuilder.True<Invoice>();
+            string sql = SqlCache.Get(db, "invoice catalog load");
+
+            List<MySqlParameter> par = new List<MySqlParameter>();
             if (!string.IsNullOrWhiteSpace(filter.InvoiceNumber))
-                q = q.And(f => f.InvoiceNumber.StartsWith(filter.InvoiceNumber));
-            if (filter.IssuedFrom.HasValue && filter.IssuedFrom.Value != DateTime.MinValue)
-                q = q.And(f => f.InvoiceIssueDate.Date >= filter.IssuedFrom.Value.Date);
-            if (filter.IssuedTo.HasValue && filter.IssuedTo.Value != DateTime.MinValue)
-                q = q.And(f => f.InvoiceIssueDate.Date <= filter.IssuedTo.Value.Date);
-            if (filter.PeriodFrom.HasValue && filter.PeriodFrom.Value != DateTime.MinValue)
-                q = q.And(f => f.InvoicePeriodFrom.Date >= filter.PeriodFrom.Value.Date);
-            if (filter.PeriodTo.HasValue && filter.PeriodTo.Value != DateTime.MinValue)
-                q = q.And(f => f.InvoicePeriodFrom.Date <= filter.PeriodTo.Value.Date);
-            if (!string.IsNullOrWhiteSpace(filter.CompanyID.Trim()))
             {
-                uint[] comp = filter.CompanyID.Split(new char[1] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(f => Convert.ToUInt32(f.Trim())).ToArray();
-                q = q.And(f => comp.Contains(f.CompanyID));
+                sql = sql.Replace("#InvoiceNumber", string.Empty);
+                par.Add(new MySqlParameter("InvoiceNumber", filter.InvoiceNumber + "%"));
             }
-            if (!string.IsNullOrWhiteSpace(filter.CompanyID.Trim()))
+            if (filter.IssuedFrom.HasValue && filter.IssuedFrom.Value != DateTime.MinValue)
             {
-                uint[] comp = filter.CompanyID.Split(new char[1] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(f => Convert.ToUInt32(f.Trim())).ToArray();
-                q = q.And(f => comp.Contains(f.CompanyID));
+                sql = sql.Replace("#IssuedFrom", string.Empty);
+                par.Add(new MySqlParameter("IssuedFrom", filter.IssuedFrom.Value.Date));
+            }
+            if (filter.IssuedTo.HasValue && filter.IssuedTo.Value != DateTime.MinValue)
+            {
+                sql = sql.Replace("#IssuedTo", string.Empty);
+                par.Add(new MySqlParameter("IssuedTo", filter.IssuedTo.Value.Date));
+            }
+            if (filter.PeriodFrom.HasValue && filter.PeriodFrom.Value != DateTime.MinValue)
+            {
+                sql = sql.Replace("#PeriodFrom", string.Empty);
+                par.Add(new MySqlParameter("PeriodFrom", filter.PeriodFrom.Value.Date));
+            }
+            if (filter.PeriodTo.HasValue && filter.PeriodTo.Value != DateTime.MinValue)
+            {
+                sql = sql.Replace("#PeriodTo", string.Empty);
+                par.Add(new MySqlParameter("PeriodTo", filter.PeriodTo.Value.Date));
             }
 
-            return db.Invoices
-                .Where(q)
-                .Select(f => new InvoiceCatalogModel()
-                {
-                    InvoiceID = f.InvoiceID,
-                    IsMarked = false,
-                    InvoiceNumber = f.InvoiceNumber,
-                    CompanyName = f.Company.CompanyName,
-                    LocationName = f.Location.LocationName,
-                    InvoiceIssueDate = f.InvoiceIssueDate,
-                    InvoicePeriodFrom = f.InvoicePeriodFrom,
-                    InvoicePeriodTo = f.InvoicePeriodTo,
-                    TotalAmount = f.InvoicesDetails.Sum(i => i.InvoiceDetailRegularPay + i.InvoiceDetailOvertimePay) + f.LateCharge,
-                    IsConfirmed = f.IsConfirmed
-                })
-                .ToList();
+
+            if (!string.IsNullOrWhiteSpace(filter.CompanyID))
+            {
+                sql = sql.Replace("#CompanyID", string.Empty);
+                sql = sql.Replace("@CompanyID", filter.CompanyID);
+            }
+            if (!string.IsNullOrWhiteSpace(filter.LocationID))
+            {
+                sql = sql.Replace("#LocationID", string.Empty);
+                sql = sql.Replace("@LocationID", filter.LocationID);
+            }
+
+            return db.ExecuteQuery<InvoiceCatalogModel>(sql, par.ToArray()).ToList();
         }
     }
 }

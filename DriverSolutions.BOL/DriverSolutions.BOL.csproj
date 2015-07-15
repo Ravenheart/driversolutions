@@ -165,7 +165,9 @@
     <Compile Include="Models\ModuleMedical\DriverMedicalCatalogModel.cs" />
     <Compile Include="Models\ModuleMedical\DriverMedicalFilterModel.cs" />
     <Compile Include="Models\ModuleMedical\DriverMedicalReminderCatalogModel.cs" />
-    <Compile Include="Models\ModuleMedical\NotificationModel.cs" />
+    <Compile Include="Models\ModuleNotification\Enums\NotificationType.cs" />
+    <Compile Include="Models\ModuleNotification\Enums\ReminderType.cs" />
+    <Compile Include="Models\ModuleNotification\NotificationModel.cs" />
     <Compile Include="Models\ModuleReports\ReportFile.cs" />
     <Compile Include="Models\ModuleSystem\CompanyDriverPayRateModel.cs" />
     <Compile Include="Models\ModuleSystem\CompanyInvoicingPayRateModel.cs" />
@@ -191,7 +193,7 @@
     <Compile Include="Repositories\ModuleFinance\HolidayRepository.cs" />
     <Compile Include="Repositories\ModuleFinance\InvoiceRepository.cs" />
     <Compile Include="Repositories\ModuleMedical\MedicalTypeRepository.cs" />
-    <Compile Include="Repositories\ModuleMedical\NotificationRepository.cs" />
+    <Compile Include="Repositories\ModuleNotification\NotificationRepository.cs" />
     <Compile Include="Repositories\ModuleReports\ReportRepository.cs" />
     <Compile Include="Repositories\ModuleSystem\CompanyRepository.cs" />
     <Compile Include="Repositories\ModuleSystem\ContactRepository.cs" />
@@ -203,7 +205,8 @@
     <Compile Include="Repositories\ModuleSystem\LocationRepository.cs" />
     <Compile Include="Repositories\ModuleSystem\ReminderRepository.cs" />
     <Compile Include="Repositories\ModuleSystem\UserRepository.cs" />
-    <Compile Include="Services\SMS.cs" />
+    <Compile Include="Services\EmailService.cs" />
+    <Compile Include="Services\SMSService.cs" />
     <Compile Include="Validators\ModuleDispatches\DispatchValidator.cs" />
     <Compile Include="Validators\ModuleDriver\DriverLicenseValidator.cs" />
     <Compile Include="Validators\ModuleFinance\InvoiceValidator.cs" />

@@ -96,12 +96,8 @@ namespace DriverSolutions.BOL.Managers.ModuleFinance
                     }
                     catch (Exception ex)
                     {
-                        using (var db = DB.GetContext())
-                        {
-                            Logger.Log(db, ex, "InvoiceCatalogManager.GenerateInvoices()");
-                            RaiseComplete(new ProgressItem(ProgressStatus.Error, ex.ToString()));
-                            db.FlushChanges();
-                        }
+                        Logger.Log(ex, "InvoiceCatalogManager.GenerateInvoices()");
+                        RaiseComplete(new ProgressItem(ProgressStatus.Error, ex.ToString()));
                     }
                 });
         }

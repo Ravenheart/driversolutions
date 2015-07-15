@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace DriverSolutions.BOL.Services
 {
-    public class SMS
+    public class SMSService
     {
         private Guid _SubscriptionId;
         private string _BaseAddress;
         private NetworkCredential _Credentials;
 
-        public SMS()
+        public SMSService()
             : this(
             GLOB.Settings.Get<string>(12),//Gateway
             GLOB.Settings.Get<string>(13),//ApiKey
@@ -23,7 +23,7 @@ namespace DriverSolutions.BOL.Services
         {
         }
 
-        public SMS(string baseAddress, string apiKey, string apiSecret, Guid subscriptionId)
+        public SMSService(string baseAddress, string apiKey, string apiSecret, Guid subscriptionId)
         {
             _BaseAddress = baseAddress;
             _Credentials = new NetworkCredential(apiKey, apiSecret);

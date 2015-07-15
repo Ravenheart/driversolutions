@@ -48,7 +48,7 @@ namespace DriverSolutions
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            SMS sms = new SMS();
+            SMSService sms = new SMSService();
 
             bool result = sms.SendSMS("12674443111", "12674443111", "Third test from your number, with international code.");
             Mess.Info("Status: " + result);

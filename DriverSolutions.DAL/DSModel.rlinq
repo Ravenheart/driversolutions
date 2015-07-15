@@ -2034,9 +2034,6 @@
       <BackendConfiguration>
         <Backend>MySql</Backend>
         <ProviderName>MySql.Data.MySqlClient</ProviderName>
-        <Runtime>
-          <CommandTimeout>5</CommandTimeout>
-        </Runtime>
         <ConnectionPool>
           <Pool>ADO</Pool>
         </ConnectionPool>
