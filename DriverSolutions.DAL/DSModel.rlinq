@@ -1416,6 +1416,28 @@
           <orm:column name="LogMessage" sql-type="text" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
         </orm:field>
       </orm:class>
+      <orm:class name="Sm" uniqueId="015193b3-170e-471c-b964-f08405f64498">
+        <orm:table name="sms" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="SmsID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_smsID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_smsID" property="SmsID" behavior="readwrite" uniqueId="e84c4435-5194-4005-a9db-f0387db95edb" type="System.UInt32">
+          <orm:column name="SmsID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_smsDestination" property="SmsDestination" behavior="readwrite" uniqueId="49346404-174c-4434-8706-aa33e69f9db1" type="System.String">
+          <orm:column name="SmsDestination" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_smsMessage" property="SmsMessage" behavior="readwrite" uniqueId="4957d4bc-ac70-4861-a833-12776718dabf" type="System.String">
+          <orm:column name="SmsMessage" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_smsSource" property="SmsSource" behavior="readwrite" uniqueId="c36b932e-cc37-4c4e-9589-a21485772372" type="System.String">
+          <orm:column name="SmsSource" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="users">
@@ -1940,6 +1962,12 @@
         <orm:column name="LogLocation" sql-type="text" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
         <orm:column name="LogMessage" sql-type="text" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
       </orm:table>
+      <orm:table name="sms">
+        <orm:column name="SmsID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="SmsDestination" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="SmsMessage" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="SmsSource" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
       <orm:procedure name="PeekDriverCode" is-function="true" return-type="varchar(255) CHARSET utf8">
         <orm:procedure-parameter name="Prefix" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" mode="in" type="System.String" />
         <orm:result-sets />
@@ -1993,6 +2021,10 @@
       </orm:procedure>
       <orm:procedure name="ToBool" is-function="true" return-type="bit(1)">
         <orm:procedure-parameter name="arg" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" mode="in" type="System.Int32" />
+        <orm:result-sets />
+      </orm:procedure>
+      <orm:procedure name="GetLicenseNotifications">
+        <orm:procedure-parameter name="CheckDate" sql-type="date" nullable="false" length="0" scale="0" ado-type="Date" mode="in" type="System.DateTime" />
         <orm:result-sets />
       </orm:procedure>
     </orm:schema>
@@ -3074,6 +3106,12 @@
       <Property Id="de1beb31-0922-4146-abe0-b364b8e34b73" name="LogMessage" label="LogMessage : String" kind="Persistent" fieldName="_logMessage" />
       <Property Id="86622b91-ac0e-457a-834b-5304cac19d7f" name="LogType" type="Byte" label="LogType : Byte" kind="Persistent" fieldName="_logType" />
     </DomainClass>
+    <DomainClass Id="015193b3-170e-471c-b964-f08405f64498" name="Sm" namespace="DriverSolutions.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="SmsID">
+      <Property Id="e84c4435-5194-4005-a9db-f0387db95edb" name="SmsID" type="UInt32" label="SmsID : UInt32" kind="Persistent" identity="true" fieldName="_smsID" />
+      <Property Id="49346404-174c-4434-8706-aa33e69f9db1" name="SmsDestination" label="SmsDestination : String" kind="Persistent" fieldName="_smsDestination" />
+      <Property Id="4957d4bc-ac70-4861-a833-12776718dabf" name="SmsMessage" label="SmsMessage : String" kind="Persistent" fieldName="_smsMessage" />
+      <Property Id="c36b932e-cc37-4c4e-9589-a21485772372" name="SmsSource" label="SmsSource : String" kind="Persistent" fieldName="_smsSource" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="0d109d24-2923-4a8b-8514-c89da1f32ad5">
@@ -3111,6 +3149,7 @@
         <entitySetProperty name="ConstLicenses" namespace="DriverSolutions.DAL" type="ConstLicense" label="ConstLicenses : IQueryable&lt;DriverSolutions.DAL.ConstLicense&gt;" />
         <entitySetProperty name="DriversLicensesReminders" namespace="DriverSolutions.DAL" type="DriversLicensesReminder" label="DriversLicensesReminders : IQueryable&lt;DriverSolutions.DAL.DriversLicensesReminder&gt;" />
         <entitySetProperty name="Logs" namespace="DriverSolutions.DAL" type="Log" label="Logs : IQueryable&lt;DriverSolutions.DAL.Log&gt;" />
+        <entitySetProperty name="Sms" namespace="DriverSolutions.DAL" type="Sm" label="Sms : IQueryable&lt;DriverSolutions.DAL.Sm&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

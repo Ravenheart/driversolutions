@@ -315,6 +315,14 @@ namespace DriverSolutions.DAL
 			}
 		}
 		
+		public IQueryable<Sm> Sms 
+		{
+			get
+			{
+				return this.GetAll<Sm>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -468,6 +476,10 @@ namespace DriverSolutions.DAL
 			get;
 		}
 		IQueryable<Log> Logs
+		{
+			get;
+		}
+		IQueryable<Sm> Sms
 		{
 			get;
 		}

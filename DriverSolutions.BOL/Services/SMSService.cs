@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DriverSolutions.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -39,6 +40,19 @@ namespace DriverSolutions.BOL.Services
         /// <returns></returns>
         public bool SendSMS(string source, string destination, string message)
         {
+            try
+            {
+                using (var db = DB.GetContext())
+                {
+                    var sms = new Sm();
+                    sms.SmsSource = source;
+                    sms.SmsDestination = destination;
+                    sms.SmsMessage = message;
+                    db.Add(sms);
+                    db.SaveChanges();
+                }
+            }
+            catch { }
             string url = string.Format("{4}/v1/{3}/sms?source={0}&destination={1}&message={2}",
                 Uri.EscapeUriString(source),
                 destination,

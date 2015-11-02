@@ -179,6 +179,9 @@
     <Compile Include="Setting.generated.cs">
       <DependentUpon>DSModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="Sm.generated.cs">
+      <DependentUpon>DSModel.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="SqlQuery.generated.cs">
       <DependentUpon>DSModel.rlinq</DependentUpon>
     </Compile>
